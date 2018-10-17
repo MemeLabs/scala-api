@@ -1,0 +1,17 @@
+version: '2'
+services:
+#  db:
+#    build: ./docker/db
+#    environment:
+#      - DEBUG=false
+#      - MYSQL_ROOT_PASSWORD=root
+#    ports:
+#      - "3306:3306"
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"

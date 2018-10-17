@@ -1,0 +1,383 @@
+{
+	"info": {
+		"_postman_id": "4317cb06-c7d9-455b-a1d0-9656d2c2beca",
+		"name": "gg- api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "polls",
+			"item": [
+				{
+					"name": "Get Poll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "jwt",
+								"type": "text",
+								"value": "{{jwt-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{gg-api-url}}/v1/poll/{{id}}",
+							"host": [
+								"{{gg-api-url}}"
+							],
+							"path": [
+								"v1",
+								"poll",
+								"{{id}}"
+							]
+						},
+						"description": "This request retrieves a poll, it's options, and any results on those options."
+					},
+					"response": [
+						{
+							"name": "Get Poll",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "jwt",
+										"value": "{{jwt-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"options\":[]\n}"
+								},
+								"url": {
+									"raw": "{{gg-api-url}}/v1/poll/{{id}}/results",
+									"host": [
+										"{{gg-api-url}}"
+									],
+									"path": [
+										"v1",
+										"poll",
+										"{{id}}",
+										"results"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"1234-5678-C345-O934\",\n    \"subject\": \"What movie to watch?\",\n    \"options\": [\n        \"Hunger Games\",\n        \"Matrix\",\n        \"Fight Club\"\n    ],\n    \"multi-vote\": false,\n    \"results\": [\n        123,\n        9,\n        0\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Poll",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "jwt",
+								"value": "{{jwt-token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"subject\":\"What movie to watch?\",\n\t\"options\": [\n\t\t\"Hunger Games\",\n\t\t\"Matrix\",\n\t\t\"Fight Club\"\n\t\t],\n\t\"multi-vote\": false\n}"
+						},
+						"url": {
+							"raw": "{{gg-api-url}}/v1/poll",
+							"host": [
+								"{{gg-api-url}}"
+							],
+							"path": [
+								"v1",
+								"poll"
+							]
+						},
+						"description": "This request creates a poll. Decoding the JWT, results in a user ID, we map that to a users channel / name using strims api. If the id already does not have an active poll, it will create a new poll tied to the channel. This tie in is for the case to show it on that users channel automatically, but a link will also be returned for other clients to get the poll / poll results / vote in the poll."
+					},
+					"response": [
+						{
+							"name": "Multi Vote",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "jwt",
+										"value": "{{jwt-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"subject\":\"What movie to watch?\",\n\t\"options\": [\n\t\t\"Hunger Games\",\n\t\t\"Matrix\",\n\t\t\"Fight Club\"\n\t\t],\n\t\"multi-vote\": true\n}"
+								},
+								"url": {
+									"raw": "{{gg-api-url}}/v1/poll",
+									"host": [
+										"{{gg-api-url}}"
+									],
+									"path": [
+										"v1",
+										"poll"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"1234-5678-C345-O934\",\n    \"link\": \"{{api-url}}/v1/poll/{{id}}\"\n}"
+						},
+						{
+							"name": "Single Vote",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "jwt",
+										"value": "{{jwt-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"subject\":\"What movie to watch?\",\n\t\"options\": [\n\t\t\"Hunger Games\",\n\t\t\"Matrix\",\n\t\t\"Fight Club\"\n\t\t],\n\t\"multi-vote\": false\n}"
+								},
+								"url": {
+									"raw": "{{gg-api-url}}/v1/poll",
+									"host": [
+										"{{gg-api-url}}"
+									],
+									"path": [
+										"v1",
+										"poll"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n\t\"id\": \"1234-5678-C345-O934\",\n\t\"link\": \"{{api-url}}/v1/poll/{{id}}\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Poll",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "jwt",
+								"value": "{{jwt-token}}",
+								"type": "text"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{gg-api-url}}/v1/poll/{{id}}",
+							"host": [
+								"{{gg-api-url}}"
+							],
+							"path": [
+								"v1",
+								"poll",
+								"{{id}}"
+							]
+						},
+						"description": "This request deletes a poll. Decoding the JWT, results in a user ID, we map this plus the poll id provided by the user to determine if the user is capable of deleting the poll."
+					},
+					"response": [
+						{
+							"name": "Delete Poll",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "jwt",
+										"value": "{{jwt-token}}",
+										"type": "text"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "{{gg-api-url}}/v1/poll/1234-5678-C345-O934",
+									"host": [
+										"{{gg-api-url}}"
+									],
+									"path": [
+										"v1",
+										"poll",
+										"1234-5678-C345-O934"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Vote on a Poll",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "jwt",
+								"type": "text",
+								"value": "{{jwt-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"options\":[]\n}"
+						},
+						"url": {
+							"raw": "{{gg-api-url}}/v1/poll/{{id}}/vote",
+							"host": [
+								"{{gg-api-url}}"
+							],
+							"path": [
+								"v1",
+								"poll",
+								"{{id}}",
+								"vote"
+							]
+						},
+						"description": "This request votes on a poll. Decoding the JWT, results in a user ID, we map this plus the poll id provided by the user to determine if the user is capable of voting in the poll. A user may only vote once, but depending on the poll potentially vote for multiple options."
+					},
+					"response": [
+						{
+							"name": "Single Vote",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "jwt",
+										"value": "{{jwt-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"options\":[]\n}"
+								},
+								"url": {
+									"raw": "{{gg-api-url}}/v1/poll/{{id}}/vote",
+									"host": [
+										"{{gg-api-url}}"
+									],
+									"path": [
+										"v1",
+										"poll",
+										"{{id}}",
+										"vote"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n  \"id\": \"1234-5678-C345-O934\",\n  \"subject\": \"What movie to watch?\",\n  \"options\": [\n    \"Hunger Games\",\n    \"Matrix\",\n    \"Fight Club\"\n  ],\n  \"multi-vote\": false,\n  \"results\": [\n    123,\n    9,\n    0\n  ]\n}"
+						},
+						{
+							"name": "Multi Vote",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "jwt",
+										"value": "{{jwt-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"options\":[]\n}"
+								},
+								"url": {
+									"raw": "{{gg-api-url}}/v1/poll/{{id}}/vote",
+									"host": [
+										"{{gg-api-url}}"
+									],
+									"path": [
+										"v1",
+										"poll",
+										"{{id}}",
+										"vote"
+									]
+								}
+							},
+							"status": "Accepted",
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n  \"id\": \"1234-5678-C345-O934\",\n  \"subject\": \"What movie to watch?\",\n  \"options\": [\n    \"Hunger Games\",\n    \"Matrix\",\n    \"Fight Club\"\n  ],\n  \"multi-vote\": false,\n  \"results\": [\n    123,\n    9,\n    0\n  ]\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

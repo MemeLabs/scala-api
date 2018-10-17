@@ -1,0 +1,13 @@
+version: '2'
+services:
+#  db:
+#    build: ./docker/db
+#    environment:
+#      - DEBUG=false
+#      - MYSQL_ROOT_PASSWORD=root
+#    ports:
+#      - "3306:3306"
+  redis:
+    image: launcher.gcr.io/google/redis4:4.0
+    ports:
+      - "6379:6379"
