@@ -65,15 +65,14 @@
 									"raw": "{\n\t\"options\":[]\n}"
 								},
 								"url": {
-									"raw": "{{gg-api-url}}/v1/poll/{{id}}/results",
+									"raw": "{{gg-api-url}}/v1/poll/{{id}}",
 									"host": [
 										"{{gg-api-url}}"
 									],
 									"path": [
 										"v1",
 										"poll",
-										"{{id}}",
-										"results"
+										"{{id}}"
 									]
 								}
 							},
@@ -82,7 +81,7 @@
 							"_postman_previewlanguage": "json",
 							"header": null,
 							"cookie": [],
-							"body": "{\n    \"id\": \"1234-5678-C345-O934\",\n    \"subject\": \"What movie to watch?\",\n    \"options\": [\n        \"Hunger Games\",\n        \"Matrix\",\n        \"Fight Club\"\n    ],\n    \"multi-vote\": false,\n    \"results\": [\n        123,\n        9,\n        0\n    ]\n}"
+							"body": "{\n    \"id\": \"c6c92d3b-372c-41b3-b146-e3ee04007f32\",\n    \"subject\": \"What movie to watch?\",\n    \"options\": {\n        \"Hunger Games\": 0,\n        \"Matrix\": 0,\n        \"Fight Club\": 0\n    },\n    \"multi_vote\": false\n}"
 						}
 					]
 				},
@@ -105,7 +104,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"subject\":\"What movie to watch?\",\n\t\"options\": [\n\t\t\"Hunger Games\",\n\t\t\"Matrix\",\n\t\t\"Fight Club\"\n\t\t],\n\t\"multi-vote\": false\n}"
+							"raw": "{\n\t\"subject\":\"What movie to watch?\",\n\t\"options\": [\n\t\t\"Hunger Games\",\n\t\t\"Matrix\",\n\t\t\"Fight Club\"\n\t\t],\n\t\"multi_vote\": false\n}"
 						},
 						"url": {
 							"raw": "{{gg-api-url}}/v1/poll",
@@ -139,7 +138,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"subject\":\"What movie to watch?\",\n\t\"options\": [\n\t\t\"Hunger Games\",\n\t\t\"Matrix\",\n\t\t\"Fight Club\"\n\t\t],\n\t\"multi-vote\": true\n}"
+									"raw": "{\n\t\"subject\":\"What movie to watch?\",\n\t\"options\": [\n\t\t\"Hunger Games\",\n\t\t\"Matrix\",\n\t\t\"Fight Club\"\n\t\t],\n\t\"multi_vote\": true\n}"
 								},
 								"url": {
 									"raw": "{{gg-api-url}}/v1/poll",
@@ -155,7 +154,7 @@
 							"_postman_previewlanguage": "json",
 							"header": null,
 							"cookie": [],
-							"body": "{\n    \"id\": \"1234-5678-C345-O934\",\n    \"link\": \"{{api-url}}/v1/poll/{{id}}\"\n}"
+							"body": "{\n    \"id\": \"c6c92d3b-372c-41b3-b146-e3ee04007f32\",\n    \"subject\": \"What movie to watch?\",\n    \"options\": {\n        \"Hunger Games\": 0,\n        \"Matrix\": 0,\n        \"Fight Club\": 0\n    },\n    \"multi-vote\": true\n}"
 						},
 						{
 							"name": "Single Vote",
@@ -176,7 +175,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"subject\":\"What movie to watch?\",\n\t\"options\": [\n\t\t\"Hunger Games\",\n\t\t\"Matrix\",\n\t\t\"Fight Club\"\n\t\t],\n\t\"multi-vote\": false\n}"
+									"raw": "{\n\t\"subject\":\"What movie to watch?\",\n\t\"options\": [\n\t\t\"Hunger Games\",\n\t\t\"Matrix\",\n\t\t\"Fight Club\"\n\t\t],\n\t\"multi_vote\": false\n}"
 								},
 								"url": {
 									"raw": "{{gg-api-url}}/v1/poll",
@@ -194,7 +193,7 @@
 							"_postman_previewlanguage": "json",
 							"header": null,
 							"cookie": [],
-							"body": "{\n\t\"id\": \"1234-5678-C345-O934\",\n\t\"link\": \"{{api-url}}/v1/poll/{{id}}\"\n}"
+							"body": "{\n    \"id\": \"c6c92d3b-372c-41b3-b146-e3ee04007f32\",\n    \"subject\": \"What movie to watch?\",\n    \"options\": {\n        \"Hunger Games\": 0,\n        \"Matrix\": 0,\n        \"Fight Club\": 0\n    },\n    \"multi_vote\": false\n}"
 						}
 					]
 				},
@@ -279,15 +278,14 @@
 							"raw": "{\n\t\"options\":[]\n}"
 						},
 						"url": {
-							"raw": "{{gg-api-url}}/v1/poll/{{id}}/vote",
+							"raw": "{{gg-api-url}}/v1/poll/{{id}}",
 							"host": [
 								"{{gg-api-url}}"
 							],
 							"path": [
 								"v1",
 								"poll",
-								"{{id}}",
-								"vote"
+								"{{id}}"
 							]
 						},
 						"description": "This request votes on a poll. Decoding the JWT, results in a user ID, we map this plus the poll id provided by the user to determine if the user is capable of voting in the poll. A user may only vote once, but depending on the poll potentially vote for multiple options."
@@ -312,7 +310,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"options\":[]\n}"
+									"raw": "{\n\t\"options\":[\"Matrix\"]\n}"
 								},
 								"url": {
 									"raw": "{{gg-api-url}}/v1/poll/{{id}}/vote",
@@ -332,7 +330,7 @@
 							"_postman_previewlanguage": "json",
 							"header": null,
 							"cookie": [],
-							"body": "{\n  \"id\": \"1234-5678-C345-O934\",\n  \"subject\": \"What movie to watch?\",\n  \"options\": [\n    \"Hunger Games\",\n    \"Matrix\",\n    \"Fight Club\"\n  ],\n  \"multi-vote\": false,\n  \"results\": [\n    123,\n    9,\n    0\n  ]\n}"
+							"body": "{\n    \"id\": \"c6c92d3b-372c-41b3-b146-e3ee04007f32\",\n    \"subject\": \"What movie to watch?\",\n    \"options\": {\n        \"Hunger Games\": 0,\n        \"Matrix\": 1,\n        \"Fight Club\": 0\n    },\n    \"multi_vote\": false\n}"
 						},
 						{
 							"name": "Multi Vote",
@@ -353,7 +351,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"options\":[]\n}"
+									"raw": "{\n\t\"options\":[\"Matrix\", \"Hunger Games\"]\n}"
 								},
 								"url": {
 									"raw": "{{gg-api-url}}/v1/poll/{{id}}/vote",
@@ -373,7 +371,7 @@
 							"_postman_previewlanguage": "json",
 							"header": null,
 							"cookie": [],
-							"body": "{\n  \"id\": \"1234-5678-C345-O934\",\n  \"subject\": \"What movie to watch?\",\n  \"options\": [\n    \"Hunger Games\",\n    \"Matrix\",\n    \"Fight Club\"\n  ],\n  \"multi-vote\": false,\n  \"results\": [\n    123,\n    9,\n    0\n  ]\n}"
+							"body": "{\n    \"id\": \"c6c92d3b-372c-41b3-b146-e3ee04007f32\",\n    \"subject\": \"What movie to watch?\",\n    \"options\": {\n        \"Hunger Games\": 1,\n        \"Matrix\": 1,\n        \"Fight Club\": 0\n    },\n    \"multi_vote\": false\n}"
 						}
 					]
 				}
