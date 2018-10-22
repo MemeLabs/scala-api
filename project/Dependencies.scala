@@ -44,6 +44,7 @@ object Dependencies {
     val sprayCaching    = "io.spray"                                    %  "spray-caching_2.11"           % "1.3.4"
     val scalaXML        = "org.scala-lang.modules"                      %  "scala-xml_2.12"               % "1.0.6"
 
+    val jwt             = "com.auth0"                                   % "java-jwt"                          % "3.4.0"
     // For enumeration cause gotta have those types
     val enumeration     = Def.setting { "com.beachape"    %% "enumeratum"                   % enumeratumVersion.value }
     // Joda DateTime for... DateTime stuff
@@ -85,6 +86,7 @@ object Dependencies {
     akkaCaching.value,
     enumeration.value,
     jodaTime,
+    jwt,
     redisClient,
     logbackClassic,
     Database.slick,

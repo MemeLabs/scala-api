@@ -1,7 +1,8 @@
 package com.app.api
 
-import akka.actor.{ActorSystem}
+import akka.actor.ActorSystem
 import akka.stream.Materializer
+import com.app.api.polls.PollVoteQueue
 import com.typesafe.config.ConfigFactory
 import org.slf4j.LoggerFactory
 
@@ -19,4 +20,5 @@ trait Dependencies {
   lazy val config = ConfigFactory.load()
   lazy val log = LoggerFactory.getLogger("main")
 
+  lazy val pollVoteQueue = PollVoteQueue.actorOf()
 }
