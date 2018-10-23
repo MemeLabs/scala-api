@@ -27,14 +27,14 @@ trait PollRoutes {
           jwtAuthenticate { userId =>
             entity(as[CreatePoll]) { cPoll =>
               // Check if an Active Poll already exists
-              val userPoll = usersPollsCache
-                .get(userId)
-                .getOrElse(Future.failed(new NoSuchElementException("Poll does not exist.")))
+//              val userPoll = usersPollsCache
+//                .get(userId)
+//                .getOrElse(Future.failed(new NoSuchElementException("Poll does not exist.")))
 
-              onComplete(userPoll) {
-                case Success(pollId) => // Poll already exists
-                  failWith(new IllegalArgumentException(s"Active Poll already exists for this user: $pollId."))
-                case Failure(e) => // Create Poll
+//              onComplete(userPoll) {
+//                case Success(pollId) => // Poll already exists
+//                  failWith(new IllegalArgumentException(s"Active Poll already exists for this user: $pollId."))
+//                case Failure(e) => // Create Poll
                   val pollId = UUID.randomUUID().toString
                   usersPollsCache.apply(userId, () => Future.successful(pollId))
                   val poll = Poll(pollId,
@@ -44,7 +44,7 @@ trait PollRoutes {
                     Map.empty[String, List[String]])
                   pollsCache.apply(pollId, () => Future.successful(poll))
                   complete(StatusCodes.Created, poll)
-              }
+//              }
             }
           }
         }
