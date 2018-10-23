@@ -36,6 +36,7 @@ trait PollRoutes {
 //                  failWith(new IllegalArgumentException(s"Active Poll already exists for this user: $pollId."))
 //                case Failure(e) => // Create Poll
                   val pollId = UUID.randomUUID().toString
+                  usersPollsCache.remove(userId)
                   usersPollsCache.apply(userId, () => Future.successful(pollId))
                   val poll = Poll(pollId,
                     cPoll.subject,
