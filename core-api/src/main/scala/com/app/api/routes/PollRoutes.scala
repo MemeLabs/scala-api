@@ -14,7 +14,7 @@ import com.app.core.model.api.polls.{CreatePoll, Poll, Vote}
 import com.auth0.jwt.JWT
 
 import scala.concurrent.Future
-import scala.util.{Failure, Success}
+import scala.util.{Failure, Success, Try}
 /**
  *
  */
@@ -104,8 +104,11 @@ trait PollRoutes {
                     case None if !poll.multi_vote && vote.options.length > 1 => // Vote
                       failWith(new IllegalArgumentException("Poll is not a multi-vote poll."))
                     case None =>
+                      // Persist the users vote to root with the queue
                       pollVoteQueue ! VotePoll(userId, poll, vote.options)
-                      complete(StatusCodes.Accepted)
+                      // Add the users vote the poll, and return
+                      val newResults = poll.options ++ vote.options.map(o => o -> (poll.options(o) + 1))
+                      complete(StatusCodes.Accepted, poll.copy(options = newResults))
                   }
                 case Failure(e) => // Respond with Not Found
                   failWith(e)
@@ -123,7 +126,7 @@ trait PollRoutes {
   }
 
   def checkJWTAuthorization(a: Option[String]): Directive1[String] = a match {
-    case Some(jwt) => provide(JWT.decode(jwt).getClaim("id").asString())
+    case Some(jwt) if Try(JWT.decode(jwt).getClaim("id")).isSuccess => provide(JWT.decode(jwt).getClaim("id").asString())
     case None => reject(AuthenticationFailedRejection(AuthenticationFailedRejection.CredentialsMissing, HttpChallenge("Basic", "JWT")))
     case _ => reject(AuthenticationFailedRejection(AuthenticationFailedRejection.CredentialsRejected, HttpChallenge("Basic", "JWT")))
   }
